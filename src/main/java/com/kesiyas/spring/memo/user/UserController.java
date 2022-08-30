@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 	@GetMapping("/signup/view")
-	public String singupView() {
+	public String signupView() {
 		
 		return "user/signup";
+	}
+	
+	@GetMapping("/signin/view")
+	public String signinView() {
+		
+		return "user/signin";
 	}
 	
 }
