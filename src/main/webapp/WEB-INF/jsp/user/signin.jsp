@@ -21,11 +21,17 @@
 		
 		<section class="contents d-flex justify-content-center">
 			<div class="join-box my-5">
-				<input type="text" placeholder="Username" class="form-control mt-3" name="loginId" id="loginIdInput">
-				<input type="password" placeholder="비밀번호" class="form-control mt-3" name="password" id="passwordInput">
-				<button type="button" class="btn btn-primary btn-block mt-3" id="loginBtn">로그인</button>
-				<div class="mt-3 d-flex justify-content-center">
-					<a href=#>회원가입</a>
+				<h2 class="text-center">로그인</h2>
+				
+				<form id="loginForm">
+					<input type="text" placeholder="Username" class="form-control mt-3" name="loginId" id="loginIdInput">
+					<input type="password" placeholder="비밀번호" class="form-control mt-3" name="password" id="passwordInput">
+					
+					<button type="submit" class="btn btn-primary btn-block mt-3" id="loginBtn">로그인</button>
+				</form>
+					<div class="mt-3 d-flex justify-content-center">
+				
+					<a href="/user/signup/view">회원가입</a>
 				</div>
 			</div>	
 		</section>
@@ -35,7 +41,11 @@
 	
 	<script>
 		$(document).ready(function(){
-			$("#loginBtn").on("click", function(){
+			//$("#loginBtn").on("click", function(){
+			$("#loginForm").on("submit", function(e){
+				
+				e.preventDefault();
+			
 				let loginId =  $("#loginIdInput").val();
 				let password = $("#passwordInput").val();
 				
