@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,25 +21,31 @@
 		
 		<section class="contents d-flex justify-content-center">
 			<div class="memo-box my-5">
-				<h2 class="text-center">회원 가입</h2>
+				<h2 class="text-center">메모 리스트</h2>
 				<table class="table text-center mt-5">
 					<thead>
-						<tr>
-							<th>No.</th>
-							<th>제목</th>
-							<th>시간</th>
+						<tr class="">
+							<th class="col-4">No.</th>
+							<th class="col-4">제목</th>
+							<th class="col-4">시간</th>
 						</tr>
 					</thead>
 					<tbody>
-						
-						<tr>
-							<td>4</td>
-							<td>중요한 메모</td>
-							<td>1111</td>
-						</tr>
-					
+						<c:forEach var="memoList" items="${memoList }" >
+							<fmt:formatDate var="date" value="${memoList.createdAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<tr>
+								<td>${memoList.id}</td>
+								<td>${memoList.subject}</td>
+								<td>${date}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				<div class="d-flex justify-content-center">
+					<div class="font-weight-bold mr-5"> 이전</div>
+					<div class="font-weight-bold"> 다음</div>
+				</div>
+				<a href="/post/create/view" class="btn btn-primary text-white float-right mt-3">글쓰기</a>
 			</div>
 		</section>
 		

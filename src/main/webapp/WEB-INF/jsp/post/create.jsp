@@ -18,13 +18,65 @@
 	<div class="container">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"></c:import>
 		
-		<section class="contents">
-		
+		<section class="contents d-flex justify-content-center align-items-center">
+			<div class="col-8 my-5">
+				<h2 class="text-center">메모 입력</h2>
+				
+				<div class="d-flex mt-3">
+					<label class="font-weight-bold col-2">제목 : </label> 
+					<input type="text" class="form-control col-10" id="titleInput">
+				</div>
+				
+				<textarea rows="7" class="form-control mt-3" placeholder="내용을 입력해주세요" id="contentInput"></textarea>
+				
+				<input type="file" class="mt-3">
+				
+				<div class="d-flex justify-content-between mt-3">
+					<a href="/post/list/view" class="btn btn-primary">목록으로</a>
+					<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
+				</div>
+			</div>
 		</section>
 	
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"></c:import>
 	</div>
 	
-
+	<script>
+		$(document).ready(function(){
+			$("#saveBtn").on("click", function(){
+				let title = $("#titleInput").val();
+				let content = $("#contentInput").val();
+				
+				if(title == "") {
+					alert("제목을 입력하세요.");
+					return;
+				}
+				
+				if(content == "") {
+					alert("내용을 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/create"
+					, data:{"title":title, "content":content}
+					, success:function(data){
+						if(data.result == "success"){
+							location.href = "/post/list/view";
+						} else {
+							alert("메모 입력 실패");
+						}
+					}
+					, error:function(){
+						alert("메모 작성 에러");
+					}
+							
+				});
+			});
+			
+			
+		});
+	</script>
 </body>
 </html>
