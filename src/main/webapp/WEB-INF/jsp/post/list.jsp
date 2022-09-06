@@ -35,7 +35,7 @@
 							<fmt:formatDate var="date" value="${memoList.createdAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							<tr>
 								<td>${memoList.id}</td>
-								<td>${memoList.subject}</td>
+								<td><a href="/post/detail/view?id=${memoList.id }">${memoList.subject}</a></td>
 								<td>${date}</td>
 							</tr>
 						</c:forEach>

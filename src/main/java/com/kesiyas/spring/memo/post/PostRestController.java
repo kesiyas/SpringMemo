@@ -1,17 +1,18 @@
 package com.kesiyas.spring.memo.post;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kesiyas.spring.memo.post.bo.PostBO;
 
@@ -27,12 +28,13 @@ public class PostRestController {
 	public Map<String, String> create(
 			@RequestParam("title") String title
 			, @RequestParam("content") String content
+			, @RequestParam(value="file", required=false) MultipartFile file
 			, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		int uesrId  = (Integer)session.getAttribute("userId");
 		
-		int count = postBO.create(uesrId, title, content);
+		int count = postBO.create(uesrId, title, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		
@@ -44,5 +46,12 @@ public class PostRestController {
 		
 		return result;
 		
+	}
+	
+	@GetMapping("/delete")
+	public String removeMemo(@RequestParam("postId") int postId) {
+		
+		
+		return "redirect:/post/list/view";
 	}
 }

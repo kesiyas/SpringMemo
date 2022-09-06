@@ -27,7 +27,9 @@
 				
 				<textarea rows="7" class="form-control mt-3" id="contentInput">${post.content }</textarea>
 				
-				<input type="file" class="mt-4">
+				<div>
+					<img src="${post.imgPath }" class="w-100" alt="메모 이미지">
+				</div>
 				
 				<div class="d-flex justify-content-between mt-4">
 					<div>

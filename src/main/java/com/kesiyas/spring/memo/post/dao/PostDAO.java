@@ -17,7 +17,8 @@ public interface PostDAO {
 	public int insertMemo(
 			@Param("userId") int userId
 			, @Param("title") String title
-			, @Param("content") String content);
+			, @Param("content") String content
+			, @Param("imgPath") String imgPath);
 	
 	// i와 일치하는 하나의 메모 조회
 	public Post selectMemo(@Param("id") int id);
