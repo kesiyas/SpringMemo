@@ -54,4 +54,14 @@ public class PostBO {
 		
 		return postDAO.updatePost(postId, title, content);
 	}
+	
+	public int deletePost(int postId) {
+		
+		// 이미지 경로가 저장된 post 정보 조회
+		Post post = postDAO.selectMemo(postId);
+		
+		FileManagerService.removeFile(post.getImgPath());
+		
+		return postDAO.deletePost(postId);
+	}
 }

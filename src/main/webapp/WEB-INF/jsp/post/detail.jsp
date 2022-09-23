@@ -34,7 +34,7 @@
 				<div class="d-flex justify-content-between mt-4">
 					<div>
 						<a href="/post/list/view" class="btn btn-primary mr-2">목록으로</a>
-						<button type="button" class="btn btn-danger">삭제</button>
+						<button type="button" class="btn btn-danger" id="deleteBtn" data-post-id="${post.id }">삭제</button>
 					</div>
 					<button type="button" class="btn btn-primary" id="updateBtn" data-post-id="${post.id }">수정</button>
 				</div>
@@ -46,6 +46,28 @@
 	
 	<script>
 		$(document).ready(function(){
+			
+			$("#deleteBtn").on("click", function(){
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get"
+					, url:"/post/delete"
+					, data:{"postId":postId}
+					, success:function(data){
+						if(data.result == "success") {
+							location.href="/post/list/view";
+						}else {
+							alert("게시물 삭제 실패");
+						}
+					}
+					, error:function(){
+						alert("게시물 삭제 에러");
+					}	
+					
+				});
+				
+			});
 			
 			$("#updateBtn").on("click", function(){
 				let title = $("#titleInput").val();

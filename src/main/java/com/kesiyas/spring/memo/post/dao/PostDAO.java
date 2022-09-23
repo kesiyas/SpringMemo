@@ -27,4 +27,6 @@ public interface PostDAO {
 			@Param("postId") int postId
 			, @Param("title") String title
 			, @Param("content") String content);
+	
+	public int deletePost(@Param("postId") int postId);
 }

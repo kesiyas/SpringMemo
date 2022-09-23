@@ -50,9 +50,49 @@ public class FileManagerService {
 		// D:\\정민우\\spring\\test\\memofile\\upload 해당 디렉토리 아래 경로
 		// /images/~
 		
-		return "/images" + directoryName + file.getOriginalFilename();
+		return "/images" + directoryName + file.getOriginalFilename();			
+	}
+	
+	// 파일 삭제 기능
+	public static boolean removeFile(String filePath) { // /images/2_12313141414/test.png
+		// 삭제 경로는 /images 를 제거 하고,
+		// 실제 파일 저장 경로를 이어 붙여주면 된다.
+		// D:\\정민우\\spring\\test\\memofile\\upload/1_4651445145/asdf.jpg
 		
+		if(filePath == null) {
+			return false;
+		}
 		
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		
+		Path path = Paths.get(realFilePath);
+		
+		// 파일이 있는지 확인
+		// 파일 삭제
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		// 디렉토리 삭제
+		// D:\\정민우\\spring\\test\\memofile\\upload/1_4651445145
+		
+		// 해당 파일이 포함되어 있는 디렉토리 경로
+		path =  path.getParent();
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 }
