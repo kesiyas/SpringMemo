@@ -28,9 +28,9 @@ public class PostController {
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		int uesrId  = (Integer)session.getAttribute("userId");
+		int userId  = (Integer)session.getAttribute("userId");
 		
-		List<Post> memoList = postBO.getMemoList(uesrId);
+		List<Post> memoList = postBO.getMemoList(userId);
 		
 		model.addAttribute("memoList", memoList);
 		
@@ -51,6 +51,7 @@ public class PostController {
 		
 		return "post/detail";
 	}
+	
 	
 	
 	

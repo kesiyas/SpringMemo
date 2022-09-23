@@ -22,4 +22,9 @@ public interface PostDAO {
 	
 	// i와 일치하는 하나의 메모 조회
 	public Post selectMemo(@Param("id") int id);
+	
+	public int updatePost(
+			@Param("postId") int postId
+			, @Param("title") String title
+			, @Param("content") String content);
 }

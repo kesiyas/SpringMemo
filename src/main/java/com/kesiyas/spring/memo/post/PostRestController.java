@@ -54,4 +54,23 @@ public class PostRestController {
 		
 		return "redirect:/post/list/view";
 	}
+	
+	@PostMapping("/update")
+	public Map<String, String> updatePost(
+			@RequestParam("postId") int postId
+			, @RequestParam("title") String title
+			, @RequestParam("content") String content) {
+		
+		int count = postBO.updatePost(postId, title, content);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
 }

@@ -36,12 +36,52 @@
 						<a href="/post/list/view" class="btn btn-primary mr-2">목록으로</a>
 						<button type="button" class="btn btn-danger">삭제</button>
 					</div>
-					<button type="button" class="btn btn-primary" id="updateBtn">수정</button>
+					<button type="button" class="btn btn-primary" id="updateBtn" data-post-id="${post.id }">수정</button>
 				</div>
 			</div>
 		</section>
 	
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"></c:import>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			
+			$("#updateBtn").on("click", function(){
+				let title = $("#titleInput").val();
+				let content = $("#contentInput").val();
+				
+				let postId = $(this).data("post-id");
+				
+				// 유효성 검사
+				if(title == "") {
+					alert("수정할 제목을 입력하세요.");
+					return;
+				}			
+				
+				if(content == "") {
+					alert("수정할 내용을 입력하세요.");
+					return;
+				}					
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/update"
+					, data:{"postId":postId, "title":title, "content":content}
+					, success:function(data){
+						if(data.result == "success") {
+							location.href="/post/list/view";
+						}else {
+							alert("게시물 수정 실패");
+						}
+					}
+					, error:function(){
+						alert("게시물 수정 에러");
+					}	
+				});			
+			});						
+			
+		});
+	</script>
 </body>
 </html>

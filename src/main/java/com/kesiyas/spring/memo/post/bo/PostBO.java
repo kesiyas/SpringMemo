@@ -38,9 +38,7 @@ public class PostBO {
 				// 파일 저장 실패
 				return 0;
 			}
-		}
-		
-	
+		}			
 		return postDAO.insertMemo(userId, title, content, imgPath);
 		
 	}
@@ -49,5 +47,11 @@ public class PostBO {
 	public Post getMemo(int id) {
 		
 		return postDAO.selectMemo(id);
+	}
+	
+	// 게시물 수정하기
+	public int updatePost(int postId, String title, String content) {
+		
+		return postDAO.updatePost(postId, title, content);
 	}
 }
